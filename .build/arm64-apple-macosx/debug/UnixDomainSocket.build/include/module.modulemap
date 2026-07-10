@@ -1,0 +1,3 @@
+module UnixDomainSocket {
+    header "/Users/sreekuttand/Downloads/ReplayKitTest/UnixDomainSocket/.build/arm64-apple-macosx/debug/UnixDomainSocket.build/include/UnixDomainSocket-Swift.h"
+}

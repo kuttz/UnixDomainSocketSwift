@@ -83,7 +83,7 @@ public final class UDSServer: NSObject {
         super.init()
     }
 
-    deinit { stop() }
+    deinit { _stop() }
 
     // MARK: - Public API
 

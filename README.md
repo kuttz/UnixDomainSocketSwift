@@ -75,6 +75,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UDSServerDelegate {
                 connectionDidClose connection: UDSConnection, error: Error?) {
         print("Extension disconnected: \(error?.localizedDescription ?? "clean")")
     }
+
+    // MARK: Send event to Client
+
+    func sendAcknowledgement(to connection: UDSConnection) {
+        let ack = StatusUpdate(code: 200, message: "Acknowledged")
+        try? server.send(ack, messageType: "StatusUpdate", to: connection)
+    }
 }
 ```
 

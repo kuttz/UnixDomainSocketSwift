@@ -1,0 +1,34 @@
+name: Share XCFramework Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Triggers automatically when you push a version tag like v1.0.0
+
+jobs:
+  build-and-release:
+    runs-on: macos-15 # Uses the latest macOS runner with modern Xcode pre-installed
+    permissions:
+      contents: write # Grants the workflow permission to create a release and upload assets
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Run Build Script
+        run: ./build-xcframework.sh
+
+      - name: Zip XCFramework
+        run: |
+          cd build
+          zip -r UnixDomainSocket.xcframework.zip UnixDomainSocket.xcframework
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/UnixDomainSocket.xcframework.zip
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

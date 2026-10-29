@@ -9,7 +9,6 @@ let package = Package(
     products: [
         .library(
             name: "UnixDomainSocket",
-            type: .dynamic,
             targets: ["UnixDomainSocket"]
         )
     ],
